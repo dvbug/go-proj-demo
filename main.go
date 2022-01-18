@@ -1,5 +1,5 @@
 // Package go_proj_demo
-// Copyright (C) Beijing Xiaomi Co., Ltd
+// Copyright (C) Vito
 // By Vito on 2022/1/18 11:55
 
 package main

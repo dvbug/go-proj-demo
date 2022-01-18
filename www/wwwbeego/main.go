@@ -1,5 +1,5 @@
 // Package beego
-// Copyright (C) Beijing Xiaomi Co., Ltd
+// Copyright (C) Vito
 // By Vito on 2022/1/18 14:37
 
 package wwwbeego
