@@ -11,7 +11,7 @@ import (
 )
 
 func Main() {
-	err := beego.LoadAppConfig("ini", "/home/vito/code/me/workspace-go/go-proj-demo/www/wwwbeego/conf/app.conf")
+	err := beego.LoadAppConfig("ini", "www/wwwbeego/conf/app.conf")
 	if err != nil {
 		fmt.Println(fmt.Sprintf("Invalid app.conf: %s", err))
 		return
