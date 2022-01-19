@@ -2,14 +2,9 @@ module go-proj-demo
 
 go 1.17
 
-require (
-	dvbug.com/scripts v0.0.0-incompatible
-	dvbug.com/wwwbeego v0.0.0-incompatible
-)
+require github.com/astaxie/beego v1.12.3
 
 require (
-	dvbug.com/wwwbeego/controller v0.0.0-incompatible // indirect
-	github.com/astaxie/beego v1.12.3 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.1.1 // indirect
 	github.com/golang/protobuf v1.4.2 // indirect
@@ -26,10 +21,4 @@ require (
 	golang.org/x/text v0.3.0 // indirect
 	google.golang.org/protobuf v1.23.0 // indirect
 	gopkg.in/yaml.v2 v2.2.8 // indirect
-)
-
-replace (
-	dvbug.com/scripts => ./scripts
-	dvbug.com/wwwbeego => ./www/wwwbeego
-	dvbug.com/wwwbeego/controller => ./www/wwwbeego/controller
 )

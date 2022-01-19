@@ -5,9 +5,9 @@
 package wwwbeego
 
 import (
-	"dvbug.com/wwwbeego/controller"
 	"fmt"
 	"github.com/astaxie/beego"
+	cl "go-proj-demo/www/wwwbeego/controller"
 )
 
 func Main() {
@@ -16,6 +16,6 @@ func Main() {
 		fmt.Println(fmt.Sprintf("Invalid app.conf: %s", err))
 		return
 	}
-	beego.Router("/echo", &controller.EchoController{})
+	beego.Router("/echo", &cl.EchoController{})
 	beego.Run()
 }

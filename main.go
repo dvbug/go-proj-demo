@@ -5,8 +5,8 @@
 package main
 
 import (
-	"dvbug.com/scripts"
-	"dvbug.com/wwwbeego"
+	"go-proj-demo/scripts"
+	"go-proj-demo/www/wwwbeego"
 )
 
 func main() {
