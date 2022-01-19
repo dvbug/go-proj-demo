@@ -39,26 +39,26 @@ func (lv LogLevel) String() string {
 	}
 }
 
-func printLn(str string, level LogLevel) {
-	fmt.Println(fmt.Sprintf("LOG/%s %s", level.String(), str))
+func printLn(v interface{}, level LogLevel) {
+	fmt.Println(fmt.Sprintf("LOG/%s %v", level.String(), v))
 }
 
-func Trace(str string) {
-	printLn(str, TRACE)
+func Trace(v interface{}) {
+	printLn(v, TRACE)
 }
 
-func Debug(str string) {
-	printLn(str, DEBUG)
+func Debug(v interface{}) {
+	printLn(v, DEBUG)
 }
 
-func Info(str string) {
-	printLn(str, INFO)
+func Info(v interface{}) {
+	printLn(v, INFO)
 }
 
-func Warn(str string) {
-	printLn(str, WARN)
+func Warn(v interface{}) {
+	printLn(v, WARN)
 }
 
-func Error(str string) {
-	printLn(str, ERROR)
+func Error(v interface{}) {
+	printLn(v, ERROR)
 }

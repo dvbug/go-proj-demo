@@ -6,12 +6,12 @@ package main
 
 import (
 	"go-proj-demo/scripts"
-	"go-proj-demo/www/wwwbeego"
 )
 
 func main() {
-	scripts.Info("This is a info log")
-	scripts.Main()
+	//scripts.Info("This is a info log")
+	//scripts.Main()
+	scripts.JsonMain()
 	//scripts.PcMain()
-	wwwbeego.Main()
+	//wwwbeego.Main()
 }
