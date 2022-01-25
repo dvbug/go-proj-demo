@@ -4,14 +4,15 @@
 
 package main
 
-import (
-	"go-proj-demo/scripts"
-)
+import "go-proj-demo/scripts"
 
 func main() {
 	//scripts.Info("This is a info log")
-	//scripts.Main()
-	scripts.JsonMain()
+	//scripts.SyntaxMain()
+	//scripts.JsonMain()
 	//scripts.PcMain()
 	//wwwbeego.Main()
+	//scripts.FetchMain()
+	//scripts.BankMain()
+	scripts.ReflectMain()
 }

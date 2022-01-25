@@ -14,6 +14,9 @@ import (
 	"unsafe"
 )
 
+// 包初始化使用 init(){}
+// 如果要在函数内部修改结构体成员的话，用指针传入是必须的；在Go语言中，所有的函数参数都是值拷贝传入的，函数参数将不再是函数调用时的原始变量。
+
 // 全局变量声明 var
 var (
 	goalA int
@@ -83,21 +86,21 @@ func funcref() {
 
 // 指针
 func funcptr() {
-	var a int= 20   /* 声明实际变量 */
-	var ip *int        /* 声明指针变量 */
+	var a int = 20 /* 声明实际变量 */
+	var ip *int    /* 声明指针变量 */
 
-	ip = &a  /* 指针变量的存储地址 */
+	ip = &a /* 指针变量的存储地址 */
 
-	fmt.Printf("a 变量的地址是: %x\n", &a  )
+	fmt.Printf("a 变量的地址是: %x\n", &a)
 
 	/* 指针变量的存储地址 */
-	fmt.Printf("ip 变量储存的指针地址: %x\n", ip )
+	fmt.Printf("ip 变量储存的指针地址: %x\n", ip)
 
 	/* 使用指针访问值 */
-	fmt.Printf("*ip 变量的值: %d\n", *ip )
+	fmt.Printf("*ip 变量的值: %d\n", *ip)
 
 	fmt.Println("ip == nil:", ip == nil)
-	var  ptr *int
+	var ptr *int
 	fmt.Println("ptr == nil:", ptr == nil)
 }
 
@@ -127,8 +130,8 @@ func funcconstiota() {
 		i        //8
 	)
 	const (
-		x = "hx"  	// hx
-		y			// hx
+		x = "hx" // hx
+		y        // hx
 	)
 	const (
 		i2 = 1 << iota // 1<<0
@@ -201,9 +204,9 @@ func funcparams(name, nick string, age, work int) {
 
 //闭包函数
 func getSequence() func() int {
-	i:=0
+	i := 0
 	return func() int {
-		i+=1
+		i += 1
 		return i
 	}
 }
@@ -234,6 +237,7 @@ func funcrecursion() {
 type Circle struct {
 	radius float64
 }
+
 // 该 method 属于 Circle 类型对象中的方法
 func (c Circle) getArea() float64 {
 	return 3.14 * c.radius * c.radius
@@ -242,6 +246,50 @@ func (c Circle) getArea() float64 {
 // c 需要使用指针 才能修改
 func (c *Circle) setRadius(r float64) {
 	c.radius = r
+}
+
+// Celsius Fahrenheit 温度类型定义和转换
+type Celsius float64    // 摄氏温度
+type Fahrenheit float64 // 华氏温度
+
+func (c Celsius) String() string { return fmt.Sprintf("%g°C", c) }
+func (f Fahrenheit) String() string { return fmt.Sprintf("%g°F", f) }
+
+const (
+	AbsoluteZeroC Celsius = -273.15 // 绝对零度
+	FreezingC     Celsius = 0       // 冰点温度
+	BoilingC      Celsius = 100     //沸水温度
+)
+
+func CtoF(c Celsius) Fahrenheit {
+	return Fahrenheit(c*9/5 + 32)
+}
+
+func FtoC(f Fahrenheit) Celsius {
+	return Celsius((f - 32) * 5 / 9)
+}
+
+
+func functempconv() {
+	fmt.Printf("%g\n", BoilingC-FreezingC) // "100" °C
+	boilingF := CtoF(BoilingC)
+	fmt.Printf("%g\n", boilingF-CtoF(FreezingC)) // "180" °F
+	//fmt.Printf("%g\n", boilingF-FreezingC)       // compile error: type mismatch
+
+	var c Celsius       // 0
+	var f Fahrenheit    // 0
+	fmt.Println(c == 0) // "true"
+	fmt.Println(f >= 0) // "true"
+	//fmt.Println(c == f)          // compile error: type mismatch
+	fmt.Println(c == Celsius(f)) // "true"
+
+	c = FtoC(212.0)
+	fmt.Println(c.String()) // "100°C"
+	fmt.Printf("%v\n", c)   // "100°C"; no need to call String explicitly
+	fmt.Printf("%s\n", c)   // "100°C"
+	fmt.Println(c)          // "100°C"
+	fmt.Printf("%g\n", c)   // "100"; does not call String
+	fmt.Println(float64(c)) // "100"; does not call String
 }
 
 // 结构体的使用
@@ -255,32 +303,32 @@ func funcmethod() {
 //数组的使用
 func funcarrays() {
 	// 声明数组
-	var l1 [5] int
+	var l1 [5]int
 	fmt.Println(l1)
 
 	//初始化数组
-	l2 := [3]int {2, 1, 3}
+	l2 := [3]int{2, 1, 3}
 	//初始化不定长数组
-	l3 := [...]int {2, 1, 3, 0}
+	l3 := [...]int{2, 1, 3, 0}
 	fmt.Println(l2)
 	fmt.Println(l3)
 	//将 1,3索引初始化
-	l4 := [5]int {1: 1, 3: 9}
+	l4 := [5]int{1: 1, 3: 9}
 	fmt.Println(l4)
 
 	l1[2] = 50
 	fmt.Println(l1)
 
-	ml1 := [2][3] int {}
+	ml1 := [2][3]int{}
 	fmt.Println(ml1)
-	ml2 := [2][3] int {{1,2,3}, {4,5,6}}
+	ml2 := [2][3]int{{1, 2, 3}, {4, 5, 6}}
 	fmt.Println(ml2)
 	fmt.Println(ml2[1][2])
 }
 
 //切片的使用
 func funcslice() {
-	s1 := [] int{1,2,3,4,5,6,7,8}
+	s1 := []int{1, 2, 3, 4, 5, 6, 7, 8}
 	fmt.Println(s1[:3])
 	fmt.Println(s1[1:3])
 	fmt.Println(s1[1:])
@@ -294,18 +342,18 @@ func funcmap() {
 	countryCapitalMap = make(map[string]string)
 
 	/* map插入key - value对,各个国家对应的首都 */
-	countryCapitalMap [ "France" ] = "巴黎"
-	countryCapitalMap [ "Italy" ] = "罗马"
-	countryCapitalMap [ "Japan" ] = "东京"
-	countryCapitalMap [ "India " ] = "新德里"
+	countryCapitalMap["France"] = "巴黎"
+	countryCapitalMap["Italy"] = "罗马"
+	countryCapitalMap["Japan"] = "东京"
+	countryCapitalMap["India "] = "新德里"
 
 	/*使用键输出地图值 */
 	for country := range countryCapitalMap {
-		fmt.Println(country, "首都是", countryCapitalMap [country])
+		fmt.Println(country, "首都是", countryCapitalMap[country])
 	}
 
 	/*查看元素在集合中是否存在 */
-	capital, ok := countryCapitalMap [ "American" ] /*如果确定是真实的,则存在,否则不存在 */
+	capital, ok := countryCapitalMap["American"] /*如果确定是真实的,则存在,否则不存在 */
 	/*fmt.Println(capital) */
 	/*fmt.Println(ok) */
 	if ok {
@@ -317,7 +365,7 @@ func funcmap() {
 
 // range的使用
 func funcrange() {
-	nums := [] int{1,2,3,4,5,6,7,8}
+	nums := []int{1, 2, 3, 4, 5, 6, 7, 8}
 	for i, num := range nums {
 		fmt.Println(i, num)
 	}
@@ -433,6 +481,7 @@ func funcerror() {
 		fmt.Println("errorMsg is: ", errorMsg)
 	}
 }
+
 //定义耗时处理函数
 func say(s string) {
 	for i := 0; i < 5; i++ {
@@ -469,34 +518,62 @@ func funcforchan() {
 	}
 }
 
+// Just can read ch in func
+func chread(ch <-chan int) {
+	fmt.Printf("Read: %d\n", <- ch)
+}
+
+// Just can write ch in func
+func chwrite(ch chan <- int) {
+	ch <- 22
+}
+
 func funccallc() {
 	cstr := C.CString("Hello, world")
 	C.puts(cstr)
 	C.free(unsafe.Pointer(cstr))
 }
 
-func Main() {
-	prt()
-	prtG()
-	funcvar()
-	funcfmt()
-	funcref()
-	funcptr()
-	funccallf()
-	funcconstiota()
-	funccondition(-22)
-	funcselect()
-	funcparams("jim", "kk", 22, 2)
-	funcclosepk()
-	funcrecursion()
-	funcmethod()
-	funcarrays()
-	funcslice()
-	funcmap()
-	funcrange()
-	funcinterface()
-	funcerror()
-	funcgo()
-	funcforchan()
-	funccallc()
+// ch这个channel的buffer大小是1，所以会交替的为空或为满，
+// 所以只有一个case可以进行下去，无论i是奇数或者偶数，它都会打印0 2 4 6 8
+// 如果多个case同时就绪时，select会随机地选择一个执行，这样来保证每一个channel都有平等的被select的机会。
+// 增加前一个例子的buffer大小会使其输出变得不确定，因为当buffer既不为满也不为空时，select语句的执行情况就像是抛硬币的行为一样是随机的。
+func funcchselect() {
+	ch := make(chan int, 1)
+	for i := 0; i < 10; i++ {
+		select {
+		case x:= <- ch:
+			fmt.Println(x)
+		case ch <- i:
+
+		}
+	}
+}
+
+func SyntaxMain() {
+	//prt()
+	//prtG()
+	//funcvar()
+	//functempconv()
+	//funcfmt()
+	//funcref()
+	//funcptr()
+	//funccallf()
+	//funcconstiota()
+	//funccondition(-22)
+	//funcselect()
+	//funcparams("jim", "kk", 22, 2)
+	//funcclosepk()
+	//funcrecursion()
+	//funcmethod()
+	//funcarrays()
+	//funcslice()
+	//funcmap()
+	//funcrange()
+	//funcinterface()
+	//funcerror()
+	//funcgo()
+	//funcforchan()
+	//funccallc()
+	funcchselect()
 }
